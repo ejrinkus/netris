@@ -10,9 +10,10 @@ class Block(pygame.sprite.Sprite):
     # Constructor
     # sheet: image object for the sprite sheet
     # rect_set: set of rotations for the block
-    def __init__(self, sheet, type):
-        rect = pygame.Rect(SPRITE_COORD.get(type))
-        self.id = type
+    def __init__(self, sheet, t):
+        super(Block, self).__init__()
+        rect = pygame.Rect(SPRITE_COORD.get(t))
+        self.id = t
         self.image = pygame.Surface(rect.size).convert()
         self.image.blit(sheet, (0, 0), rect)
 
@@ -25,7 +26,9 @@ class Tetromino(object):
     def __init__(self, t):
         self.matrix = BLOCKS.get(t)
         self.id = t
-        self.coord = (3,0)
+        self.coord = [3,0]
+        self.width = len(self.matrix[0])
+        self.height = len(self.matrix)
 
     # Rotate the tetromino clockwise
     def rotateRight(self):
@@ -76,6 +79,8 @@ class Grid(object):
         self.location = coord
         self.changed = []
         self.grid = []
+        self.width = width
+        self.height = height
         for i in xrange(height):
             self.grid.append([])
             for j in xrange(width):
@@ -88,13 +93,15 @@ class Grid(object):
     # c: new type for the cell
     # sprite: sprite to draw to the cell
     def changeCell(self, row, col, c, sprite):
-        if self.grid[row][col].contents == c: return
+        if not (0 <= row < self.height and 0 <= col < self.width) or self.grid[row][col].contents == c:
+            return
         self.grid[row][col].setContents(c)
         x = BOX_SIZE-1
-        if sprite != None:
+        if sprite is not None:
             sprite = pygame.transform.scale(sprite, (BOX_SIZE, BOX_SIZE))
             self.grid[row][col].surface.blit(sprite, (0,0))
         else:
+            self.grid[row][col].surface.fill(BLACK)
             pygame.draw.line(self.grid[row][col].surface, GREY, (0,0), (0,x), 1)
             pygame.draw.line(self.grid[row][col].surface, GREY, (x,0), (x,x), 1)
             pygame.draw.line(self.grid[row][col].surface, GREY, (0,0), (x,0), 1)
@@ -108,3 +115,95 @@ class Grid(object):
         for (row,col) in self.changed:
             surf.blit(self.grid[row][col].surface, (col*x+self.location[0], row*x+self.location[1]))
         self.changed = []
+
+    # Returns the altered Tetromino if the movement is valid, or None if not. (for all below functions)
+    # tetromino: Tetromino object being moved
+
+    # move down
+    def validMoveDown(self, tetromino):
+        for i,row in enumerate(tetromino.matrix):
+            # Break if the last row is at the bottom of the grid AND contains part of the tetromino
+            if i+tetromino.coord[1] >= self.height-1 and tetromino.id in row:
+                break
+            for j,block in enumerate(tetromino.matrix[i]):
+                # Continue if the block is empty or if the block below is part of the tetromino
+                if block == 'E': continue
+                if i < tetromino.height-1 and tetromino.matrix[i+1][j] != 'E': continue
+                # Break if there is a block in the way
+                pos = self.grid[i+tetromino.coord[1]+1][j+tetromino.coord[0]].contents
+                if pos != 'E':
+                    break
+            else:
+                continue
+            break
+        else:
+            tetromino.coord[1] += 1
+            return tetromino
+        return None
+
+    # move left
+    def validMoveLeft(self, tetromino):
+        for i,row in enumerate(tetromino.matrix):
+            for j,block in enumerate(tetromino.matrix[i]):
+                # Continue if the block is empty or if the block to the left is part of the tetromino
+                if block == 'E': continue
+                # Break if the tetromino is at the side
+                if j+tetromino.coord[0] <= 0: break
+                if j > 0 and tetromino.matrix[i][j-1] != 'E': continue
+                # Break if there is a block in the way
+                pos = self.grid[i+tetromino.coord[1]][j+tetromino.coord[0]-1].contents
+                if pos != 'E': break
+            else:
+                continue
+            break
+        else:
+            tetromino.coord[0] -= 1
+            return tetromino
+        return None
+
+    # move up
+    def validMoveUp(self, tetromino):
+        for i,row in enumerate(tetromino.matrix):
+            # Break if the first row is at the top of the grid AND contains part of the tetromino
+            if i+tetromino.coord[1] <= 0 and tetromino.id in row:
+                break
+            for j,block in enumerate(tetromino.matrix[i]):
+                # Continue if the block is empty or if the block above is part of the tetromino
+                if block == 'E': continue
+                if i > 0 and tetromino.matrix[i-1][j] != 'E': continue
+                # Break if there is a block in the way
+                pos = self.grid[i+tetromino.coord[1]-1][j+tetromino.coord[0]].contents
+                if pos != 'E': break
+            else:
+                continue
+            break
+        else:
+            tetromino.coord[1] -= 1
+            return tetromino
+        return None
+
+    # move right
+    def validMoveRight(self, tetromino):
+        for i,row in enumerate(tetromino.matrix):
+            for j,block in enumerate(tetromino.matrix[i]):
+                # Continue if the block is empty or if the block to the right is part of the tetromino
+                if block == 'E': continue
+                # Break if the tetromino is at the side
+                if j+tetromino.coord[0] >= self.width-1: break
+                if j < tetromino.width-1 and tetromino.matrix[i][j+1] != 'E': continue
+                # Break if there is a block in the way
+                pos = self.grid[i+tetromino.coord[1]][j+tetromino.coord[0]+1].contents
+                if pos != 'E': break
+            else:
+                continue
+            break
+        else:
+            tetromino.coord[0] += 1
+            return tetromino
+        return None
+
+    def validRotLeft(self, tetromino):
+        print "holder"
+
+    def validRotRight(self, tetromino):
+        print "holder"

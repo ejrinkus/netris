@@ -50,19 +50,18 @@ while True:
             shuffle(order)
         nextpiece = Tetromino(order[count])
         # Draw next piece
-        for i in xrange(len(nextpiece.matrix)):
-            for j in xrange(len(nextpiece.matrix[i])):
-                change = nextpiece.matrix[i][j]
-                if change != 'E':
-                    next_box.changeCell(i+1,j+1,change,sprites.get(change).image)
+        for i,row in enumerate(nextpiece.matrix):
+            for j,block in enumerate(nextpiece.matrix[i]):
+                if block != 'E':
+                    next_box.changeCell(i+1,j+1,block,sprites.get(block).image)
                 else:
-                    next_box.changeCell(i+1,j+1,change,None)
+                    next_box.changeCell(i+1,j+1,block,None)
         # Draw current piece
-        for i in xrange(len(activepiece.matrix)):
-            for j in xrange(len(activepiece.matrix[i])):
+        offi = activepiece.coord[1]
+        offj = activepiece.coord[0]
+        for i,row in enumerate(activepiece.matrix):
+            for j,block in enumerate(activepiece.matrix[i]):
                 change = activepiece.matrix[i][j]
-                offi = activepiece.coord[1]
-                offj = activepiece.coord[0]
                 if change != 'E':
                     board.changeCell(i+offi,j+offj,change,sprites.get(change).image)
                 else:
@@ -85,10 +84,11 @@ while True:
                 if event.key == K_DOWN:
                     down = d_first = True
                     d_hold = 3
-                if event.key == K_SPACE:
-                    print 'rotate here'
+                if event.key == K_LCTRL:
+                    print 'rotate left'
                 if event.key == K_RCTRL:
-                    spawn = True
+                    print 'rotate right'
+                
             # Pause the game
             if event.key == K_p:
                 paused = not paused
@@ -115,27 +115,42 @@ while True:
         # Move the piece (timer used to slow down the speed if the key is held down)
         if event.type == INPUT_TIMER:
             if not paused:
+                for i, row in enumerate(activepiece.matrix):
+                    for j, block in enumerate(row):
+                        if block != 'E':
+                            board.changeCell(i+activepiece.coord[1], j+activepiece.coord[0], 'E', None)
                 if up:
                     if u_first or u_hold <= 0:
-                        #TODO
+                        board.validMoveUp(activepiece)
                         u_first = False
                     else: u_hold -= 1
                 if left:
                     if l_first or l_hold <= 0:
-                        #TODO
+                        w = activepiece.width
+                        board.validMoveLeft(activepiece)
                         l_first = False
                     else: l_hold -= 1
                 if right:
                     if r_first or r_hold <= 0:
-                        #TODO
+                        board.validMoveRight(activepiece)
                         r_first = False
                     else: r_hold -= 1
                 if down:
                     if d_first or d_hold <= 0:
-                        #TODO
+                        board.validMoveDown(activepiece)
                         d_first = False
                     else: d_hold -= 1
 
+    # Draw the active piece
+    offi = activepiece.coord[1]
+    offj = activepiece.coord[0]
+    for i,row in enumerate(activepiece.matrix):
+        for j,block in enumerate(activepiece.matrix[i]):
+            change = activepiece.matrix[i][j]
+            if change != 'E':
+                board.changeCell(i+offi,j+offj,change,sprites.get(change).image)
+            else:
+                board.changeCell(i+offi,j+offj,change,None)
     next_box.drawChanges(disp)
     board.drawChanges(disp)
     pygame.display.update()
