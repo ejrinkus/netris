@@ -41,14 +41,15 @@ class Tetromino(object):
 class Cell(object):
     # Constructor
     def __init__(self, hidden = False):
-        self.surface = pygame.Surface((24,24))
+        x = BOX_SIZE-1
+        self.surface = pygame.Surface((BOX_SIZE,BOX_SIZE))
         self.contents = 'E'
         self.hidden = hidden
         if not hidden:
-            pygame.draw.line(self.surface, GREY, (0,0), (0,23), 1)
-            pygame.draw.line(self.surface, GREY, (23,0), (23,23), 1)
-            pygame.draw.line(self.surface, GREY, (0,0), (23,0), 1)
-            pygame.draw.line(self.surface, GREY, (0,23), (23,23), 1)
+            pygame.draw.line(self.surface, GREY, (0,0), (0,x), 1)
+            pygame.draw.line(self.surface, GREY, (x,0), (x,x), 1)
+            pygame.draw.line(self.surface, GREY, (0,0), (x,0), 1)
+            pygame.draw.line(self.surface, GREY, (0,x), (x,x), 1)
 
     # Changes the contents of the cell
     # c: new contents of the cell
@@ -89,18 +90,21 @@ class Grid(object):
     def changeCell(self, row, col, c, sprite):
         if self.grid[row][col].contents == c: return
         self.grid[row][col].setContents(c)
+        x = BOX_SIZE-1
         if sprite != None:
+            sprite = pygame.transform.scale(sprite, (BOX_SIZE, BOX_SIZE))
             self.grid[row][col].surface.blit(sprite, (0,0))
         else:
-            pygame.draw.line(self.grid[row][col].surface, GREY, (0,0), (0,23), 1)
-            pygame.draw.line(self.grid[row][col].surface, GREY, (23,0), (23,23), 1)
-            pygame.draw.line(self.grid[row][col].surface, GREY, (0,0), (23,0), 1)
-            pygame.draw.line(self.grid[row][col].surface, GREY, (0,23), (23,23), 1)
+            pygame.draw.line(self.grid[row][col].surface, GREY, (0,0), (0,x), 1)
+            pygame.draw.line(self.grid[row][col].surface, GREY, (x,0), (x,x), 1)
+            pygame.draw.line(self.grid[row][col].surface, GREY, (0,0), (x,0), 1)
+            pygame.draw.line(self.grid[row][col].surface, GREY, (0,x), (x,x), 1)
         if (row,col) not in self.changed: self.changed.append((row,col))
 
     # Draws any changed cells to the given surface
     # surf: surface to be drawn to
     def drawChanges(self, surf):
+        x = BOX_SIZE-1
         for (row,col) in self.changed:
-            surf.blit(self.grid[row][col].surface, (col*23+self.location[0], row*23+self.location[1]))
+            surf.blit(self.grid[row][col].surface, (col*x+self.location[0], row*x+self.location[1]))
         self.changed = []

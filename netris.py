@@ -7,17 +7,12 @@ from random import shuffle
 from consts import *
 from classes import *
 
-# Initializers
-pygame.init()
-disp = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Netris v.0.1')
-
 # Playing board
-board = Grid((SCREEN_WIDTH/2 - BOARD_WIDTH/2, 5), 10, 22)
+board = Grid((SCREEN_W/2 - BOX_SIZE*5, BOX_SIZE/5), 10, 22)
 board.drawChanges(disp)
 
 # Next piece box
-next_box = Grid((60, 53), 5, 5)
+next_box = Grid((board.location[0] - BOX_SIZE*6, BOX_SIZE/5 + BOX_SIZE*2), 5, 5)
 next_box.drawChanges(disp)
 
 # Sprite array
@@ -95,8 +90,11 @@ while True:
                 if event.key == K_RCTRL:
                     spawn = True
             # Pause the game
-            if event.key == K_p or event.key == K_ESCAPE:
+            if event.key == K_p:
                 paused = not paused
+            if event.key == K_ESCAPE:
+                pygame.quit()
+                sys.exit()
 
         # Key was released
         if event.type == KEYUP:

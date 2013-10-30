@@ -1,13 +1,17 @@
 __author__ = 'Eric'
 
+import pygame
 from pygame.locals import USEREVENT
 
+# Initializers
+pygame.init()
+disp = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+pygame.display.set_caption('Netris v.0.1')
+
 # screen constants
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-BOARD_WIDTH = 240
-BOARD_HEIGHT = 480
-NEXT_BOX_SIZE = 96
+SCREEN_W = pygame.display.Info().current_w
+SCREEN_H = pygame.display.Info().current_h
+BOX_SIZE = SCREEN_H/30
 
 # color constants
 BLACK = (0, 0, 0)
