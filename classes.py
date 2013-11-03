@@ -1,6 +1,6 @@
 __author__ = 'Eric'
 
-import pygame
+import pygame, copy
 from consts import *
 
 # Class to display each individual block
@@ -29,14 +29,39 @@ class Tetromino(object):
         self.coord = [3,0]
         self.width = len(self.matrix[0])
         self.height = len(self.matrix)
+        self.state = 0
+        if t == 'I':
+            self.kicks = (((0,0),(2,0),(-1,0),(2,-1),(-1,2)),
+                         ((0,0),(-2,0),(-1,0),(-2,-1),(1,2)),
+                         ((0,0),(-2,0),(1,0),(-2,-1),(1,1)),
+                         ((0,0),(-2,0),(1,0),(1,-2),(-2,1)),
+                         ((0,0),(1,0),(-2,0),(1,-2),(-2,1)),
+                         ((0,0),(-1,0),(2,0),(-1,-2),(2,1)),
+                         ((0,0),(2,0),(-1,0),(-1,-2),(2,1)),
+                         ((0,0),(2,0),(-1,0),(2,-1),(-1,1)))
+        else :
+            self.kicks = (((0,0),(1,0),(1,1),(0,-2),(1,-2)),
+                         ((0,0),(-1,0),(-1,1),(0,-2),(-1,-2)),
+                         ((0,0),(-1,0),(-1,-1),(0,2),(-1,2)),
+                         ((0,0),(-1,0),(-1,-1),(0,2),(-1,2)),
+                         ((0,0),(-1,0),(-1,1),(0,-2),(-1,-2)),
+                         ((0,0),(1,0),(1,1),(0,-2),(1,-2)),
+                         ((0,0),(1,0),(1,-1),(0,2),(1,2)),
+                         ((0,0),(1,0),(1,-1),(0,2),(1,2)))
 
     # Rotate the tetromino clockwise
     def rotateRight(self):
         self.matrix = zip(*self.matrix[::-1])
+        self.state += 1
+        if self.state == 4:
+            self.state = 0
 
     # Rotate the tetromino counterclockwise
     def rotateLeft(self):
         self.matrix = zip(*self.matrix)[::-1]
+        self.state -= 1
+        if self.state == -1:
+            self.state = 3
 
 # Class representing a single cell of a grid
 # surface: surface upon which the contents of the cell may be drawn
@@ -86,6 +111,17 @@ class Grid(object):
             for j in xrange(width):
                 self.grid[i].append(Cell(i in hide))
                 self.changed.append((i,j))
+
+    def clear(self):
+        for i,row in enumerate(self.grid):
+            for j,block in enumerate(row):
+                self.changeCell(i,j,'E',None)
+
+    def clearRow(self):
+        for row in self.grid:
+            for block in row:
+                if block.contents == 'E': return
+
 
     # Change the contents of a cell in the grid.  Tracks the cell for future drawing.
     # row: row of the cell
@@ -202,8 +238,50 @@ class Grid(object):
             return tetromino
         return None
 
-    def validRotLeft(self, tetromino):
-        print "holder"
-
     def validRotRight(self, tetromino):
-        print "holder"
+        tetromino.rotateRight()
+        kicks = tetromino.kicks[tetromino.state*2 + 1]
+        for i in xrange(5):
+            tetromino.coord[0] += kicks[i][0]
+            tetromino.coord[1] += kicks[i][1]
+            for j,row in enumerate(tetromino.matrix):
+                for k,block in enumerate(tetromino.matrix[j]):
+                    if block == 'E': continue
+                    if j+tetromino.coord[1] < 0 or j+tetromino.coord[1] >= self.height: break
+                    if k+tetromino.coord[0] < 0 or k+tetromino.coord[0] >= self.width: break
+                    if self.grid[j+tetromino.coord[1]][k+tetromino.coord[0]].contents != 'E': break
+
+                else:
+                    continue
+                break
+            else:
+                return tetromino
+            tetromino.coord[0] -= kicks[i][0]
+            tetromino.coord[1] -= kicks[i][1]
+        tetromino.rotateLeft()
+        return tetromino
+
+
+
+    def validRotLeft(self, tetromino):
+        tetromino.rotateLeft()
+        kicks = tetromino.kicks[tetromino.state*2]
+        for i in xrange(5):
+            tetromino.coord[0] += kicks[i][0]
+            tetromino.coord[1] += kicks[i][1]
+            for j,row in enumerate(tetromino.matrix):
+                for k,block in enumerate(tetromino.matrix[j]):
+                    if block == 'E': continue
+                    if j+tetromino.coord[1] < 0 or j+tetromino.coord[1] >= self.height: break
+                    if k+tetromino.coord[0] < 0 or k+tetromino.coord[0] >= self.width: break
+                    if self.grid[j+tetromino.coord[1]][k+tetromino.coord[0]].contents != 'E': break
+
+                else:
+                    continue
+                break
+            else:
+                return tetromino
+            tetromino.coord[0] -= kicks[i][0]
+            tetromino.coord[1] -= kicks[i][1]
+        tetromino.rotateRight()
+        return tetromino

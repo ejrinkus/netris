@@ -49,6 +49,7 @@ while True:
             count = 0
             shuffle(order)
         nextpiece = Tetromino(order[count])
+        next_box.clear()
         # Draw next piece
         for i,row in enumerate(nextpiece.matrix):
             for j,block in enumerate(nextpiece.matrix[i]):
@@ -85,10 +86,20 @@ while True:
                     down = d_first = True
                     d_hold = 3
                 if event.key == K_LCTRL:
-                    print 'rotate left'
+                    for i, row in enumerate(activepiece.matrix):
+                        for j, block in enumerate(row):
+                            if block != 'E':
+                                board.changeCell(i+activepiece.coord[1], j+activepiece.coord[0], 'E', None)
+                    board.validRotLeft(activepiece)
                 if event.key == K_RCTRL:
-                    print 'rotate right'
-                
+                    for i, row in enumerate(activepiece.matrix):
+                        for j, block in enumerate(row):
+                            if block != 'E':
+                                board.changeCell(i+activepiece.coord[1], j+activepiece.coord[0], 'E', None)
+                    board.validRotRight(activepiece)
+                if event.key == K_SPACE:
+                    spawn = True
+
             # Pause the game
             if event.key == K_p:
                 paused = not paused
@@ -145,12 +156,9 @@ while True:
     offi = activepiece.coord[1]
     offj = activepiece.coord[0]
     for i,row in enumerate(activepiece.matrix):
-        for j,block in enumerate(activepiece.matrix[i]):
-            change = activepiece.matrix[i][j]
-            if change != 'E':
-                board.changeCell(i+offi,j+offj,change,sprites.get(change).image)
-            else:
-                board.changeCell(i+offi,j+offj,change,None)
+        for j,block in enumerate(row):
+            if block != 'E':
+                board.changeCell(i+offi,j+offj,block,sprites.get(block).image)
     next_box.drawChanges(disp)
     board.drawChanges(disp)
     pygame.display.update()
