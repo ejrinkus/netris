@@ -7,6 +7,21 @@ from random import shuffle
 from consts import *
 from classes import *
 
+def clearPiece(p):
+    for i, row in enumerate(p.matrix):
+        for j, block in enumerate(row):
+            if block != 'E':
+                board.changeCell(i+p.coord[1], j+p.coord[0], 'E', None)
+
+def preparePiece(p):
+    offi = p.coord[1]
+    offj = p.coord[0]
+    for i,row in enumerate(p.matrix):
+        for j,block in enumerate(p.matrix[i]):
+            change = p.matrix[i][j]
+            if change != 'E':
+                board.changeCell(i+offi,j+offj,change,sprites.get(change).image)
+
 # Playing board
 board = Grid((SCREEN_W/2 - BOX_SIZE*5, BOX_SIZE/5), 10, 22)
 board.drawChanges(disp)
@@ -29,6 +44,7 @@ sprites = {'I' : Block(sheet,'I'),
 paused = False
 spawn = True
 pygame.time.set_timer(INPUT_TIMER, 50)
+pygame.time.set_timer(DROP_TIMER, 1000)
 u_hold = d_hold = l_hold = r_hold = 3
 up = down = left = right = False
 u_first = d_first = l_first = r_first = False
@@ -57,16 +73,9 @@ while True:
                     next_box.changeCell(i+1,j+1,block,sprites.get(block).image)
                 else:
                     next_box.changeCell(i+1,j+1,block,None)
-        # Draw current piece
-        offi = activepiece.coord[1]
-        offj = activepiece.coord[0]
-        for i,row in enumerate(activepiece.matrix):
-            for j,block in enumerate(activepiece.matrix[i]):
-                change = activepiece.matrix[i][j]
-                if change != 'E':
-                    board.changeCell(i+offi,j+offj,change,sprites.get(change).image)
-                else:
-                    board.changeCell(i+offi,j+offj,change,None)
+        # Prepare active piece for drawing
+        preparePiece(activepiece)
+
 
     # Event handler
     for event in pygame.event.get():
@@ -74,8 +83,8 @@ while True:
         if event.type == KEYDOWN:
             if not paused:
                 if event.key == K_UP:
-                    up = u_first = True
-                    u_hold = 3
+                    clearPiece(activepiece)
+                    while board.validMoveDown(activepiece) is not None: continue
                 if event.key == K_LEFT:
                     left = l_first = True
                     l_hold = 3
@@ -109,8 +118,6 @@ while True:
 
         # Key was released
         if event.type == KEYUP:
-            if event.key == K_UP:
-                up = u_first = False
             if event.key == K_LEFT:
                 left = l_first = False
             if event.key == K_RIGHT:
@@ -123,18 +130,10 @@ while True:
             pygame.quit()
             sys.exit()
 
-        # Move the piece (timer used to slow down the speed if the key is held down)
+        # Move the piece (timer used to control the hold speed)
         if event.type == INPUT_TIMER:
             if not paused:
-                for i, row in enumerate(activepiece.matrix):
-                    for j, block in enumerate(row):
-                        if block != 'E':
-                            board.changeCell(i+activepiece.coord[1], j+activepiece.coord[0], 'E', None)
-                if up:
-                    if u_first or u_hold <= 0:
-                        board.validMoveUp(activepiece)
-                        u_first = False
-                    else: u_hold -= 1
+                clearPiece(activepiece)
                 if left:
                     if l_first or l_hold <= 0:
                         w = activepiece.width
@@ -152,15 +151,20 @@ while True:
                         d_first = False
                     else: d_hold -= 1
 
-    # Draw the active piece
-    offi = activepiece.coord[1]
-    offj = activepiece.coord[0]
-    for i,row in enumerate(activepiece.matrix):
-        for j,block in enumerate(row):
-            if block != 'E':
-                board.changeCell(i+offi,j+offj,block,sprites.get(block).image)
+        if event.type == DROP_TIMER:
+            clearPiece(activepiece)
+            if board.validMoveDown(activepiece) is None:
+                spawn = True
+
+    # Prepare active piece for drawing
+    preparePiece(activepiece)
+
+    # Check rows for clearing
+    if spawn:
+        for i in xrange(board.height):
+            board.clearRow(i)
+
+    # Draw everything
     next_box.drawChanges(disp)
     board.drawChanges(disp)
     pygame.display.update()
-
-

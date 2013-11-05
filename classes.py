@@ -112,16 +112,26 @@ class Grid(object):
                 self.grid[i].append(Cell(i in hide))
                 self.changed.append((i,j))
 
+    # Clear out every cell in the grid
     def clear(self):
         for i,row in enumerate(self.grid):
             for j,block in enumerate(row):
                 self.changeCell(i,j,'E',None)
 
-    def clearRow(self):
-        for row in self.grid:
-            for block in row:
-                if block.contents == 'E': return
-
+    # Check a row and clear it if it is full
+    # low: index of the row to cehck
+    def clearRow(self,row):
+        # Check the row
+        for block in self.grid[row]:
+            if block.contents == 'E': return
+        # Copy all rows obove it downward to clear it
+        for i,r in reversed(list(enumerate(self.grid))):
+            if i > row: continue
+            for j,block in enumerate(r):
+                if i == 0:
+                    self.changeCell(i,j,'E',None)
+                else:
+                    self.changeCell(i,j,self.grid[i-1][j].contents,self.grid[i-1][j].surface)
 
     # Change the contents of a cell in the grid.  Tracks the cell for future drawing.
     # row: row of the cell
