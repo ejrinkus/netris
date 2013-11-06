@@ -26,8 +26,10 @@
       <file leaf-file-name="netris.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/netris.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="30" selection-start="2687" selection-end="2687" vertical-scroll-proportion="3.0447762" vertical-offset="204" max-vertical-offset="2907">
-              <folding />
+            <state line="204" column="29" selection-start="6858" selection-end="6858" vertical-scroll-proportion="0.66169155" vertical-offset="3202" max-vertical-offset="3621">
+              <folding>
+                <element signature="e#21#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -35,7 +37,7 @@
       <file leaf-file-name="consts.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/consts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="19" selection-start="428" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="805" max-vertical-offset="1207">
+            <state line="25" column="0" selection-start="536" selection-end="536" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="1207">
               <folding />
             </state>
           </provider>
@@ -44,10 +46,8 @@
       <file leaf-file-name="classes.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/classes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="40" selection-start="4815" selection-end="4815" vertical-scroll-proportion="0.0" vertical-offset="2059" max-vertical-offset="5151">
-              <folding>
-                <element signature="e#21#40#0" expanded="true" />
-              </folding>
+            <state line="26" column="30" selection-start="832" selection-end="832" vertical-scroll-proportion="0.0" vertical-offset="363" max-vertical-offset="5236">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -376,16 +376,16 @@
     <entry file="file://$PROJECT_DIR$/classes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="23" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="3791">
-          <folding>
-            <element signature="e#21#40#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/netris.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="141" column="72" selection-start="4829" selection-end="4829" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2771">
-          <folding />
+          <folding>
+            <element signature="e#21#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -399,16 +399,16 @@
     <entry file="file://$PROJECT_DIR$/classes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="182" column="40" selection-start="7157" selection-end="7157" vertical-scroll-proportion="0.0" vertical-offset="3094" max-vertical-offset="3604">
-          <folding>
-            <element signature="e#21#40#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/netris.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="134" column="18" selection-start="4469" selection-end="4469" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2856">
-          <folding />
+          <folding>
+            <element signature="e#21#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -422,16 +422,16 @@
     <entry file="file://$PROJECT_DIR$/classes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="170" column="54" selection-start="6814" selection-end="6814" vertical-scroll-proportion="0.0" vertical-offset="2890" max-vertical-offset="3587">
-          <folding>
-            <element signature="e#21#40#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/netris.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="141" column="26" selection-start="4507" selection-end="4507" vertical-scroll-proportion="0.0" vertical-offset="958" max-vertical-offset="2567">
-          <folding />
+          <folding>
+            <element signature="e#21#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -445,16 +445,16 @@
     <entry file="file://$PROJECT_DIR$/classes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="98" column="41" selection-start="3656" selection-end="3656" vertical-scroll-proportion="0.0" vertical-offset="1434" max-vertical-offset="1904">
-          <folding>
-            <element signature="e#21#40#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/netris.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="70" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="578">
-          <folding />
+          <folding>
+            <element signature="e#21#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -470,26 +470,26 @@
         <state line="245" column="0" selection-start="3246" selection-end="3246" vertical-scroll-proportion="0.33333334" vertical-offset="4040" max-vertical-offset="5627" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/consts.py">
+    <entry file="file://$PROJECT_DIR$/classes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="19" selection-start="428" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="805" max-vertical-offset="1207">
+        <state line="26" column="30" selection-start="832" selection-end="832" vertical-scroll-proportion="0.0" vertical-offset="363" max-vertical-offset="5236">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classes.py">
+    <entry file="file://$PROJECT_DIR$/consts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="40" selection-start="4815" selection-end="4815" vertical-scroll-proportion="0.0" vertical-offset="2059" max-vertical-offset="5151">
-          <folding>
-            <element signature="e#21#40#0" expanded="true" />
-          </folding>
+        <state line="25" column="0" selection-start="536" selection-end="536" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="1207">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/netris.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="30" selection-start="2687" selection-end="2687" vertical-scroll-proportion="3.0447762" vertical-offset="204" max-vertical-offset="2907">
-          <folding />
+        <state line="204" column="29" selection-start="6858" selection-end="6858" vertical-scroll-proportion="0.66169155" vertical-offset="3202" max-vertical-offset="3621">
+          <folding>
+            <element signature="e#21#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
