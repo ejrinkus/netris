@@ -23,6 +23,7 @@ YELLOW = (255, 255, 0)
 CYAN = (0, 255, 255)
 MAGENTA = (255, 0, 255)
 GREY = (50, 50, 50)
+LIGHT_GREY = (100, 100, 100)
 
 # shape constants/coordinates (for the sprite sheet)
 BLOCK_FILE = "assets/block_sheet.png"

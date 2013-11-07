@@ -16,23 +16,23 @@ def clearPiece(p):
 def preparePiece(p):
     offi = p.coord[1]
     offj = p.coord[0]
+    drawCoords = []
     for i,row in enumerate(p.matrix):
         for j,block in enumerate(p.matrix[i]):
-            change = p.matrix[i][j]
-            if change != 'E':
-                board.changeCell(i+offi,j+offj,change,sprites.get(change).image)
+            if block != 'E':
+                if(board.grid[i+offi][j+offj].contents == 'E'): drawCoords.append((i+offi,j+offj))
+                else: return False
+    for coord in drawCoords:
+        board.changeCell(coord[0],coord[1],p.id,sprites.get(p.id).image)
+    return True
 
-def swapPieces(a,b):
-        a.id, b.id = b.id, a.id
-        a.width, b.width = b.width, a.width
-        a.height, b.height = b.height, a.height
-        a.matrix, b.matrix = b.matrix, a.matrix
-        a.state, b.state = b.state, a.state
-        a.kicks, b.kicks = b.kicks, a.kicks
+def exitGame():
+    pygame.quit()
+    sys.exit()
 
 
 # Playing board
-board = Grid((SCREEN_W/2 - BOX_SIZE*5, BOX_SIZE/5), 10, 22)
+board = Grid((SCREEN_W/2 - BOX_SIZE*5, BOX_SIZE/5), 10, 22, (0,1))
 board.drawChanges(disp)
 
 # Next piece box
@@ -68,15 +68,29 @@ shuffle(order)
 count = 0
 nextpiece = Tetromino(order[count])
 heldpiece = Tetromino()
+cleared = 0
+timeFlag = False
+speed = 1000.0
+score = 0
+level = 1
+font = pygame.font.SysFont("monospace",24)
 
 # Main game loop
 while True:
+
+    if timeFlag:
+        timeFlag = False
+        speed *= 0.9
+        level += 1
+        pygame.time.set_timer(DROP_TIMER, int(speed))
 
     # Switch out the held piece
     if hold:
         hold = hold_flag = False
         clearPiece(activepiece)
-        swapPieces(activepiece,heldpiece)
+        temp = activepiece.id
+        activepiece = Tetromino(heldpiece.id)
+        heldpiece = Tetromino(temp)
         # Draw held piece
         hold_box.clear()
         for i,row in enumerate(heldpiece.matrix):
@@ -110,7 +124,8 @@ while True:
                 else:
                     next_box.changeCell(i+1,j+1,block,None)
         # Prepare active piece for drawing
-        preparePiece(activepiece)
+        if not preparePiece(activepiece):
+            exitGame()
 
     # Event handler
     for event in pygame.event.get():
@@ -148,8 +163,7 @@ while True:
             if event.key == K_p:
                 paused = not paused
             if event.key == K_ESCAPE:
-                pygame.quit()
-                sys.exit()
+                exitGame()
 
         # Key was released
         if event.type == KEYUP:
@@ -162,8 +176,7 @@ while True:
 
         # Exits the game safely
         if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+            exitGame()
 
         # Move the piece (timer used to control the hold speed)
         if event.type == INPUT_TIMER:
@@ -197,11 +210,28 @@ while True:
 
     # Check rows for clearing
     if spawn:
+        temp = 0
         for i in xrange(board.height):
-            board.clearRow(i)
+            if board.clearRow(i):
+                cleared += 1
+                temp += 1
+                if cleared % 10 == 0: timeFlag = True
+        if temp == 1:
+            score += 100*level
+        elif temp == 2:
+            score += 300*level
+        elif temp == 3:
+            score += 500*level
+        elif temp == 4:
+            score += 800*level
 
     # Draw everything
     next_box.drawChanges(disp)
     hold_box.drawChanges(disp)
     board.drawChanges(disp)
+    levellabel = font.render("Level: "+str(level), 1, LIGHT_GREY)
+    scorelabel = font.render("Score: "+str(score), 1, LIGHT_GREY)
+    disp.blit(pygame.Surface((SCREEN_W,BOX_SIZE*2)),(0,0))
+    disp.blit(levellabel,(SCREEN_W/2-BOX_SIZE*5,0))
+    disp.blit(scorelabel,(SCREEN_W/2-BOX_SIZE*5,BOX_SIZE))
     pygame.display.update()

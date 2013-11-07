@@ -129,7 +129,7 @@ class Grid(object):
     def clearRow(self,row):
         # Check the row
         for block in self.grid[row]:
-            if block.contents == 'E': return
+            if block.contents == 'E': return False
         # Copy all rows obove it downward to clear it
         for i,r in reversed(list(enumerate(self.grid))):
             if i > row: continue
@@ -138,6 +138,7 @@ class Grid(object):
                     self.changeCell(i,j,'E',None)
                 else:
                     self.changeCell(i,j,self.grid[i-1][j].contents,self.grid[i-1][j].surface)
+        return True
 
     # Change the contents of a cell in the grid.  Tracks the cell for future drawing.
     # row: row of the cell
@@ -165,6 +166,7 @@ class Grid(object):
     def drawChanges(self, surf):
         x = BOX_SIZE-1
         for (row,col) in self.changed:
+            if self.grid[row][col].hidden: continue
             surf.blit(self.grid[row][col].surface, (col*x+self.location[0], row*x+self.location[1]))
         self.changed = []
 
@@ -276,8 +278,6 @@ class Grid(object):
             tetromino.coord[1] -= kicks[i][1]
         tetromino.rotateLeft()
         return tetromino
-
-
 
     def validRotLeft(self, tetromino):
         tetromino.rotateLeft()
