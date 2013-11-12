@@ -4,21 +4,21 @@ import pygame
 import sys
 from pygame.locals import *
 from random import shuffle
-from consts import *
+import consts as C
 from classes import *
 
 class SinglePlayerGame(object):
 
     def __init__(self):
-        disp.fill(BLACK)
+        C.disp.fill(C.BLACK)
 
         # Flags and other necessary variables
         self.paused = False
         self.spawn = True
         self.hold = False
         self.hold_flag = False
-        pygame.time.set_timer(INPUT_TIMER, 50)
-        pygame.time.set_timer(DROP_TIMER, 1000)
+        pygame.time.set_timer(C.INPUT_TIMER, 50)
+        pygame.time.set_timer(C.DROP_TIMER, 1000)
         self.u_hold = self.d_hold = self.l_hold = self.r_hold = 3
         self.up = self.down = self.left = self.right = False
         self.u_first = self.d_first = self.l_first = self.r_first = False
@@ -27,40 +27,35 @@ class SinglePlayerGame(object):
         self.count = 0
         self.nextpiece = Tetromino(self.order[self.count])
         self.heldpiece = Tetromino()
+        self.activepiece = Tetromino()
         self.cleared = 0
         self.timeFlag = False
         self.speed = 1000.0
         self.score = 0
         self.level = 1
-        self.font = pygame.font.SysFont("monospace",24)
+        self.shadowPiece = None
 
         # Playing board
-        self.board = Grid((SCREEN_W/2 - BOX_SIZE*5, BOX_SIZE/5), 10, 22, (0,1))
-        self.board.drawChanges(disp)
+        self.board = Grid((C.SCREEN_W/2 - C.BOX_SIZE*5, C.BOX_SIZE/5), 10, 22, (0,1))
+        self.board.drawChanges(C.disp)
 
         # Next piece box
-        self.next_box = Grid((self.board.location[0] - BOX_SIZE*6, BOX_SIZE/5 + BOX_SIZE*2), 5, 5)
-        self.next_box.drawChanges(disp)
+        self.next_box = Grid((self.board.location[0] - C.BOX_SIZE*6, C.BOX_SIZE/5 + C.BOX_SIZE*2), 5, 5)
+        self.next_box.drawChanges(C.disp)
 
         # Hold box
-        self.hold_box = Grid((self.board.location[0] + BOX_SIZE*11, BOX_SIZE/5 + BOX_SIZE*2), 5, 5)
-        self.hold_box.drawChanges(disp)
-
-        # Sprite array
-        self.sheet = pygame.image.load(BLOCK_FILE).convert()
-        self.sprites = {'I' : Block(self.sheet,'I'),
-                  'J' : Block(self.sheet,'J'),
-                  'L' : Block(self.sheet,'L'),
-                  'O' : Block(self.sheet,'O'),
-                  'S' : Block(self.sheet,'S'),
-                  'T' : Block(self.sheet,'T'),
-                  'Z' : Block(self.sheet,'Z')}
+        self.hold_box = Grid((self.board.location[0] + C.BOX_SIZE*11, C.BOX_SIZE/5 + C.BOX_SIZE*2), 5, 5)
+        self.hold_box.drawChanges(C.disp)
 
     def clearPiece(self,p):
+        if p is None: return
         for i, row in enumerate(p.matrix):
             for j, block in enumerate(row):
                 if block != 'E':
-                    self.board.changeCell(i+p.coord[1], j+p.coord[0], 'E', None)
+                    if not p.shadow or (p.shadow and 0 <=  i+p.coord[1] < self.board.height and \
+                                                     0 <=  j+p.coord[0] < self.board.width and \
+                                                     self.board.grid[i+p.coord[1]][j+p.coord[0]].contents == 'E'):
+                        self.board.clearCell(i+p.coord[1], j+p.coord[0])
 
     def preparePiece(self,p):
         offi = p.coord[1]
@@ -69,21 +64,33 @@ class SinglePlayerGame(object):
         for i,row in enumerate(p.matrix):
             for j,block in enumerate(p.matrix[i]):
                 if block != 'E':
-                    if(self.board.grid[i+offi][j+offj].contents == 'E'): drawCoords.append((i+offi,j+offj))
+                    if self.board.grid[i+offi][j+offj].contents == 'E': drawCoords.append((i+offi,j+offj))
                     else: return False
         for coord in drawCoords:
-            self.board.changeCell(coord[0],coord[1],p.id,self.sprites.get(p.id).image)
+            self.board.changeCell(coord[0],coord[1],p)
         return True
+
+    def makeShadow(self):
+        self.shadowPiece = Tetromino(self.activepiece.id,True)
+        self.shadowPiece.state = self.activepiece.state
+        self.shadowPiece.matrix = self.activepiece.matrix
+        self.shadowPiece.coord[0] = self.activepiece.coord[0]
+        self.shadowPiece.coord[1] = self.activepiece.coord[1]
+
+        while self.board.validMoveDown(self.shadowPiece): continue
+
+        self.preparePiece(self.shadowPiece)
 
     def main(self):
         # Main game loop
         while True:
 
+            # Set speed appropriate to level
             if self.timeFlag:
                 self.timeFlag = False
-                self.speed *= 0.9
+                self.speed *= 0.8944272
                 self.level += 1
-                pygame.time.set_timer(DROP_TIMER, int(self.speed))
+                pygame.time.set_timer(C.DROP_TIMER, int(self.speed))
 
             # Switch out the held piece
             if self.hold:
@@ -97,9 +104,9 @@ class SinglePlayerGame(object):
                 for i,row in enumerate(self.heldpiece.matrix):
                     for j,block in enumerate(row):
                         if block != 'E':
-                            self.hold_box.changeCell(i+1,j+1,block,self.sprites.get(block).image)
+                            self.hold_box.changeCell(i+1,j+1,self.heldpiece)
                         else:
-                            self.hold_box.changeCell(i+1,j+1,block,None)
+                            self.hold_box.clearCell(i+1,j+1)
                 # Prepare active piece for drawing (or spawn new piece if there was no held piece)
                 if self.activepiece.id != 'E':
                     self.preparePiece(self.activepiece)
@@ -121,9 +128,9 @@ class SinglePlayerGame(object):
                 for i,row in enumerate(self.nextpiece.matrix):
                     for j,block in enumerate(row):
                         if block != 'E':
-                            self.next_box.changeCell(i+1,j+1,block,self.sprites.get(block).image)
+                            self.next_box.changeCell(i+1,j+1,self.nextpiece)
                         else:
-                            self.next_box.changeCell(i+1,j+1,block,None)
+                            self.next_box.clearCell(i+1,j+1)
                 # Prepare active piece for drawing
                 if not self.preparePiece(self.activepiece):
                     return
@@ -135,7 +142,7 @@ class SinglePlayerGame(object):
                     if not self.paused:
                         if event.key == K_UP:
                             self.clearPiece(self.activepiece)
-                            while self.board.validMoveDown(self.activepiece) is not None: continue
+                            while self.board.validMoveDown(self.activepiece): continue
                         if event.key == K_LEFT:
                             self.left = self.l_first = True
                             self.l_hold = 3
@@ -149,13 +156,13 @@ class SinglePlayerGame(object):
                             for i, row in enumerate(self.activepiece.matrix):
                                 for j, block in enumerate(row):
                                     if block != 'E':
-                                        self.board.changeCell(i+self.activepiece.coord[1], j+self.activepiece.coord[0], 'E', None)
+                                        self.board.clearCell(i+self.activepiece.coord[1], j+self.activepiece.coord[0])
                             self.board.validRotLeft(self.activepiece)
                         if event.key == K_RCTRL and self.activepiece.id != 'O':
                             for i, row in enumerate(self.activepiece.matrix):
                                 for j, block in enumerate(row):
                                     if block != 'E':
-                                        self.board.changeCell(i+self.activepiece.coord[1], j+self.activepiece.coord[0], 'E', None)
+                                        self.board.clearCell(i+self.activepiece.coord[1], j+self.activepiece.coord[0])
                             self.board.validRotRight(self.activepiece)
                         if event.key == K_SPACE and self.hold_flag == True:
                             self.hold = True
@@ -181,7 +188,7 @@ class SinglePlayerGame(object):
                     sys.exit()
 
                 # Move the piece (timer used to control the hold speed)
-                if event.type == INPUT_TIMER:
+                if event.type == C.INPUT_TIMER:
                     if not self.paused:
                         self.clearPiece(self.activepiece)
                         if self.left:
@@ -200,13 +207,15 @@ class SinglePlayerGame(object):
                                 self.d_first = False
                             else: self.d_hold -= 1
 
-                if event.type == DROP_TIMER:
+                if event.type == C.DROP_TIMER:
                     if not self.paused:
                         self.clearPiece(self.activepiece)
-                        if self.board.validMoveDown(self.activepiece) is None:
+                        if not self.board.validMoveDown(self.activepiece):
                             self.spawn = True
 
             # Prepare active piece for drawing
+            self.clearPiece(self.shadowPiece)
+            self.makeShadow()
             self.preparePiece(self.activepiece)
 
             # Check rows for clearing
@@ -216,7 +225,7 @@ class SinglePlayerGame(object):
                     if self.board.clearRow(i):
                         self.cleared += 1
                         temp += 1
-                        if self.cleared % 10 == 0: self.timeFlag = True
+                        if self.cleared % 5 == 0: self.timeFlag = True
                 if temp == 1:
                     self.score += 100*self.level
                 elif temp == 2:
@@ -227,13 +236,13 @@ class SinglePlayerGame(object):
                     self.score += 800*self.level
 
             # Draw everything
-            self.next_box.drawChanges(disp)
-            self.hold_box.drawChanges(disp)
-            self.board.drawChanges(disp)
-            levellabel = self.font.render("Level: "+str(self.level), 1, LIGHT_GREY)
-            scorelabel = self.font.render("Score: "+str(self.score), 1, LIGHT_GREY)
-            disp.blit(pygame.Surface((SCREEN_W,BOX_SIZE*2)),(0,0))
-            disp.blit(levellabel,(SCREEN_W/2-BOX_SIZE*5,0))
-            disp.blit(scorelabel,(SCREEN_W/2-BOX_SIZE*5,BOX_SIZE))
+            self.next_box.drawChanges(C.disp)
+            self.hold_box.drawChanges(C.disp)
+            self.board.drawChanges(C.disp)
+            levellabel = C.scoreFont.render("Level: "+str(self.level), 1, C.LIGHT_GREY)
+            scorelabel = C.scoreFont.render("Score: "+str(self.score), 1, C.LIGHT_GREY)
+            C.disp.blit(pygame.Surface((C.SCREEN_W, C.BOX_SIZE*2)), (0,0))
+            C.disp.blit(levellabel, (C.SCREEN_W/2 - C.BOX_SIZE*5, 0))
+            C.disp.blit(scorelabel, (C.SCREEN_W/2 - C.BOX_SIZE*5, C.BOX_SIZE))
             pygame.display.update()
 

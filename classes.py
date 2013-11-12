@@ -1,7 +1,7 @@
 __author__ = 'Eric'
 
-import pygame, copy
-from consts import *
+import pygame
+import consts as C
 
 # Class to display each individual block
 # id: Shape the block belongs to (determines color, too)
@@ -12,7 +12,7 @@ class Block(pygame.sprite.Sprite):
     # rect_set: set of rotations for the block
     def __init__(self, sheet, t):
         super(Block, self).__init__()
-        rect = pygame.Rect(SPRITE_COORD.get(t))
+        rect = pygame.Rect(C.SPRITE_COORD.get(t))
         self.id = t
         self.image = pygame.Surface(rect.size).convert()
         self.image.blit(sheet, (0, 0), rect)
@@ -24,12 +24,13 @@ class Tetromino(object):
 
     # Constructor
     # t: Type of tetromino
-    def __init__(self, t='E'):
+    def __init__(self, t='E', shadow=False):
+        self.shadow = shadow
         if t == 'E':
             self.matrix = (('E','E'),('E','E'))
             self.coord = [0,0]
         else:
-            self.matrix = BLOCKS.get(t)
+            self.matrix = C.BLOCKS.get(t)
             self.coord = [3,0]
         self.id = t
         self.width = len(self.matrix[0])
@@ -75,15 +76,15 @@ class Tetromino(object):
 class Cell(object):
     # Constructor
     def __init__(self, hidden = False):
-        x = BOX_SIZE-1
-        self.surface = pygame.Surface((BOX_SIZE,BOX_SIZE))
+        x = C.BOX_SIZE-1
+        self.surface = pygame.Surface((C.BOX_SIZE,C.BOX_SIZE))
         self.contents = 'E'
         self.hidden = hidden
         if not hidden:
-            pygame.draw.line(self.surface, GREY, (0,0), (0,x), 1)
-            pygame.draw.line(self.surface, GREY, (x,0), (x,x), 1)
-            pygame.draw.line(self.surface, GREY, (0,0), (x,0), 1)
-            pygame.draw.line(self.surface, GREY, (0,x), (x,x), 1)
+            pygame.draw.line(self.surface, C.GREY, (0,0), (0,x), 1)
+            pygame.draw.line(self.surface, C.GREY, (x,0), (x,x), 1)
+            pygame.draw.line(self.surface, C.GREY, (0,0), (x,0), 1)
+            pygame.draw.line(self.surface, C.GREY, (0,x), (x,x), 1)
 
     # Changes the contents of the cell
     # c: new contents of the cell
@@ -122,7 +123,7 @@ class Grid(object):
     def clear(self):
         for i,row in enumerate(self.grid):
             for j,block in enumerate(row):
-                self.changeCell(i,j,'E',None)
+                self.clearCell(i,j)
 
     # Check a row and clear it if it is full
     # low: index of the row to cehck
@@ -135,9 +136,11 @@ class Grid(object):
             if i > row: continue
             for j,block in enumerate(r):
                 if i == 0:
-                    self.changeCell(i,j,'E',None)
+                    self.clearCell(i,j)
                 else:
-                    self.changeCell(i,j,self.grid[i-1][j].contents,self.grid[i-1][j].surface)
+                    self.grid[i][j].surface.blit(self.grid[i-1][j].surface, (0,0))
+                    self.grid[i][j].contents = self.grid[i-1][j].contents
+                    if (i,j) not in self.changed: self.changed.append((i,j))
         return True
 
     # Change the contents of a cell in the grid.  Tracks the cell for future drawing.
@@ -145,26 +148,31 @@ class Grid(object):
     # col: col of the cell
     # c: new type for the cell
     # sprite: sprite to draw to the cell
-    def changeCell(self, row, col, c, sprite):
-        if not (0 <= row < self.height and 0 <= col < self.width) or self.grid[row][col].contents == c:
+    def changeCell(self, row, col, piece):
+        if not (0 <= row < self.height and 0 <= col < self.width):
             return
-        self.grid[row][col].setContents(c)
-        x = BOX_SIZE-1
-        if sprite is not None:
-            sprite = pygame.transform.scale(sprite, (BOX_SIZE, BOX_SIZE))
-            self.grid[row][col].surface.blit(sprite, (0,0))
+        if piece.shadow and self.grid[row][col].contents == 'E':
+            sprite = pygame.transform.scale(C.shadowsprites.get(piece.id).image, (C.BOX_SIZE, C.BOX_SIZE))
         else:
-            self.grid[row][col].surface.fill(BLACK)
-            pygame.draw.line(self.grid[row][col].surface, GREY, (0,0), (0,x), 1)
-            pygame.draw.line(self.grid[row][col].surface, GREY, (x,0), (x,x), 1)
-            pygame.draw.line(self.grid[row][col].surface, GREY, (0,0), (x,0), 1)
-            pygame.draw.line(self.grid[row][col].surface, GREY, (0,x), (x,x), 1)
+            sprite = pygame.transform.scale(C.sprites.get(piece.id).image, (C.BOX_SIZE, C.BOX_SIZE))
+            self.grid[row][col].setContents(piece.id)
+        self.grid[row][col].surface.blit(sprite, (0,0))
+        if (row,col) not in self.changed: self.changed.append((row,col))
+
+    def clearCell(self, row, col):
+        x = C.BOX_SIZE-1
+        self.grid[row][col].setContents('E')
+        self.grid[row][col].surface.fill(C.BLACK)
+        pygame.draw.line(self.grid[row][col].surface, C.GREY, (0,0), (0,x), 1)
+        pygame.draw.line(self.grid[row][col].surface, C.GREY, (x,0), (x,x), 1)
+        pygame.draw.line(self.grid[row][col].surface, C.GREY, (0,0), (x,0), 1)
+        pygame.draw.line(self.grid[row][col].surface, C.GREY, (0,x), (x,x), 1)
         if (row,col) not in self.changed: self.changed.append((row,col))
 
     # Draws any changed cells to the given surface
     # surf: surface to be drawn to
     def drawChanges(self, surf):
-        x = BOX_SIZE-1
+        x = C.BOX_SIZE-1
         for (row,col) in self.changed:
             if self.grid[row][col].hidden: continue
             surf.blit(self.grid[row][col].surface, (col*x+self.location[0], row*x+self.location[1]))
@@ -192,8 +200,8 @@ class Grid(object):
             break
         else:
             tetromino.coord[1] += 1
-            return tetromino
-        return None
+            return True
+        return False
 
     # move left
     def validMoveLeft(self, tetromino):
@@ -212,8 +220,8 @@ class Grid(object):
             break
         else:
             tetromino.coord[0] -= 1
-            return tetromino
-        return None
+            return True
+        return False
 
     # move up
     def validMoveUp(self, tetromino):
@@ -233,8 +241,8 @@ class Grid(object):
             break
         else:
             tetromino.coord[1] -= 1
-            return tetromino
-        return None
+            return True
+        return False
 
     # move right
     def validMoveRight(self, tetromino):
@@ -253,8 +261,8 @@ class Grid(object):
             break
         else:
             tetromino.coord[0] += 1
-            return tetromino
-        return None
+            return True
+        return False
 
     def validRotRight(self, tetromino):
         tetromino.rotateRight()
