@@ -21,7 +21,7 @@ quitLabel = menuFont.render("Quit Game", False, LIGHT_GREY)
 logo = pygame.image.load("assets/logo.png").convert()
 
 # Render loop
-while(True):
+while True:
     # Draw Logo
     disp.blit(logo, (SCREEN_W/2 - logo.get_width()/2, BOX_SIZE*2))
 
@@ -30,7 +30,7 @@ while(True):
     disp.blit(multiLabel, (SCREEN_W/2 - multiLabel.get_width()/2, SCREEN_H/2))
     disp.blit(optionsLabel, (SCREEN_W/2 - optionsLabel.get_width()/2, SCREEN_H/2 + BOX_SIZE*2))
     disp.blit(quitLabel, (SCREEN_W/2 - quitLabel.get_width()/2, SCREEN_H/2 + BOX_SIZE*4))
-    pygame.display.update();
+    pygame.display.update()
 
     # Input Loop
     for event in pygame.event.get():

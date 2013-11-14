@@ -23,13 +23,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="netris.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="netris.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/netris.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="0" selection-start="426" selection-end="426" vertical-scroll-proportion="0.042288557" vertical-offset="221" max-vertical-offset="1105">
+            <state line="23" column="10" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0" vertical-offset="257" max-vertical-offset="1105">
               <folding>
                 <element signature="e#290#300#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="winsetup.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/winsetup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="0" selection-start="269" selection-end="269" vertical-scroll-proportion="0.38059703" vertical-offset="0" max-vertical-offset="402">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -65,8 +74,8 @@
         <option value="$PROJECT_DIR$/modules/parts/Grid.py" />
         <option value="$PROJECT_DIR$/modules/Game.py" />
         <option value="$PROJECT_DIR$/modules/gametypes/single.py" />
-        <option value="$PROJECT_DIR$/netris.py" />
         <option value="$PROJECT_DIR$/winsetup.py" />
+        <option value="$PROJECT_DIR$/netris.py" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -555,22 +564,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/winsetup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="22" selection-start="306" selection-end="306" vertical-scroll-proportion="0.46517414" vertical-offset="0" max-vertical-offset="402">
-          <folding>
-            <element signature="e#236#268#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="96" selection-start="420" selection-end="420" vertical-scroll-proportion="0.5920398" vertical-offset="0" max-vertical-offset="402">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/parts/Grid.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="35" selection-start="468" selection-end="468" vertical-scroll-proportion="0.46517414" vertical-offset="0" max-vertical-offset="5015">
@@ -580,10 +573,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/netris.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="426" selection-end="426" vertical-scroll-proportion="0.042288557" vertical-offset="221" max-vertical-offset="1105">
+        <state line="23" column="10" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0" vertical-offset="257" max-vertical-offset="1105">
           <folding>
             <element signature="e#290#300#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="79" selection-end="79" vertical-scroll-proportion="0.2960199" vertical-offset="0" max-vertical-offset="476">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/winsetup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="269" selection-end="269" vertical-scroll-proportion="0.38059703" vertical-offset="0" max-vertical-offset="402">
+          <folding />
         </state>
       </provider>
     </entry>
