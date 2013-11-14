@@ -3,6 +3,13 @@ Netris
 
 This is a networked Tetris clone.  For bros.
 
-Version History
-===============
-0.1 Basic game - no menu, score, or round counter, one speed.  Only has basic controls (shift left/right, drop fast, drop instant, and rotate clockwise), and shows the next piece.  Completed lines disappear, blocks properly stack, game exits when top boundary is breached.
+Controls:
+    Left/Right Arrow Keys: Shift Left/Right
+    Up Arrow Key: Hard Drop
+    Down Arrow Key: Soft Drop
+    Spacebar: Hold Piece
+    Left/Right Ctrl: Rotate Left/Right
+
+Make sure you have Python 2.7 and Pygame installed if you want to play with the code
+
+Otherwise, run the .exe in the dist folder (it works on windows, not sure about other platforms)
