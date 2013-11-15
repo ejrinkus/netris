@@ -11,7 +11,7 @@ __author__ = 'Eric'
 import pygame
 from modules.parts.Cell import Cell
 from modules.parts.Tetromino import Tetromino
-from modules.consts import *
+from consts import *
 
 # Class representing a grid
 # grid: 2-D array of cell objects representing this grid
@@ -53,7 +53,7 @@ class Grid(object):
         for i,r in reversed(list(enumerate(self.grid))):
             if i > row: continue
             for j,block in enumerate(r):
-                if i == 0 or self.grid[i][j].contents == 'E':
+                if i == 0 or self.grid[i-1][j].contents == 'E':
                     self.clearCell(i,j)
                 else:
                     self.grid[i][j].surface.blit(self.grid[i-1][j].surface, (0,0))

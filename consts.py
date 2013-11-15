@@ -36,9 +36,9 @@ BLOCK_FILE = "assets/block_sheet.png"
 SHADOW_FILE = "assets/block_shadows.png"
 
 # event ids
-INPUT_TIMER = USEREVENT
-DROP_TIMER = USEREVENT+1
+INPUT_TIMER = USEREVENT+1
+DROP_TIMER = USEREVENT+2
 
 # Fonts
 scoreFont = pygame.font.SysFont("monospace",24)
-menuFont = font = pygame.font.Font("assets/spacerangeracad.ttf",BOX_SIZE*2)
+menuFont = font = pygame.font.Font("assets/spacerangeracad.ttf",BOX_SIZE*3)

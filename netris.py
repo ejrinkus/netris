@@ -10,14 +10,22 @@ __author__ = 'Eric'
 import sys
 import pygame
 from pygame.locals import *
-from modules.consts import *
+from consts import *
 from modules.gametypes.single import SinglePlayerGame
 
 # Set up the fonts and logo for the menu
 singleLabel = menuFont.render("Single Player", False, LIGHT_GREY)
+singleRect = pygame.Rect((SCREEN_W/2 - singleLabel.get_width()/2, SCREEN_H/2 - BOX_SIZE*3),
+                              (singleLabel.get_width(), singleLabel.get_height()))
 multiLabel = menuFont.render("Multiplayer", False, LIGHT_GREY)
+multiRect = pygame.Rect((SCREEN_W/2 - multiLabel.get_width()/2, SCREEN_H/2),
+                              (multiLabel.get_width(), multiLabel.get_height()))
 optionsLabel = menuFont.render("Options", False, LIGHT_GREY)
+optionsRect = pygame.Rect((SCREEN_W/2 - optionsLabel.get_width()/2, SCREEN_H/2 + BOX_SIZE*3),
+                              (optionsLabel.get_width(), optionsLabel.get_height()))
 quitLabel = menuFont.render("Quit Game", False, LIGHT_GREY)
+quitRect = pygame.Rect((SCREEN_W/2 - quitLabel.get_width()/2, SCREEN_H/2 + BOX_SIZE*6),
+                              (quitLabel.get_width(), quitLabel.get_height()))
 logo = pygame.image.load("assets/logo.png").convert()
 
 # Render loop
@@ -26,34 +34,30 @@ while True:
     disp.blit(logo, (SCREEN_W/2 - logo.get_width()/2, BOX_SIZE*2))
 
     # Draw Text
-    disp.blit(singleLabel, (SCREEN_W/2 - singleLabel.get_width()/2, SCREEN_H/2 - BOX_SIZE*2))
-    disp.blit(multiLabel, (SCREEN_W/2 - multiLabel.get_width()/2, SCREEN_H/2))
-    disp.blit(optionsLabel, (SCREEN_W/2 - optionsLabel.get_width()/2, SCREEN_H/2 + BOX_SIZE*2))
-    disp.blit(quitLabel, (SCREEN_W/2 - quitLabel.get_width()/2, SCREEN_H/2 + BOX_SIZE*4))
+    disp.blit(singleLabel, (singleRect.left, singleRect.top))
+    disp.blit(multiLabel, (multiRect.left, multiRect.top))
+    disp.blit(optionsLabel, (optionsRect.left, optionsRect.top))
+    disp.blit(quitLabel, (quitRect.left, quitRect.top))
     pygame.display.update()
 
     # Input Loop
     for event in pygame.event.get():
         if event.type == MOUSEBUTTONDOWN:
             # Clicked Single Player
-            if SCREEN_W/2 - singleLabel.get_width()/2 <= event.pos[0] <= SCREEN_W/2 + singleLabel.get_width()/2 and \
-                            SCREEN_H/2 - BOX_SIZE*2 <= event.pos[1] <= SCREEN_H/2:
+            if singleRect.collidepoint(event.pos):
                 game = SinglePlayerGame()
                 game.main()
                 disp.fill(BLACK)
 
             # Clicked Multiplayer
-            if SCREEN_W/2 - multiLabel.get_width()/2 <= event.pos[0] <= SCREEN_W/2 + multiLabel.get_width()/2 and \
-                            SCREEN_H/2 <= event.pos[1] <= SCREEN_H/2 + BOX_SIZE*2:
+            if multiRect.collidepoint(event.pos):
                 print "Multiplayer"
 
             # Clicked Options
-            if SCREEN_W/2 - optionsLabel.get_width()/2 <= event.pos[0] <= SCREEN_W/2 + optionsLabel.get_width()/2 and \
-                            SCREEN_H/2 + BOX_SIZE*2 <= event.pos[1] <= SCREEN_H/2 + BOX_SIZE*4:
+            if optionsRect.collidepoint(event.pos):
                 print "Options"
 
             # Clicked Quit Game
-            if SCREEN_W/2 - quitLabel.get_width()/2 <= event.pos[0] <= SCREEN_W/2 + quitLabel.get_width()/2 and \
-                            SCREEN_H/2 + BOX_SIZE*4 <= event.pos[1] <= SCREEN_H/2 + BOX_SIZE*6:
+            if quitRect.collidepoint(event.pos):
                 pygame.quit()
                 sys.exit()

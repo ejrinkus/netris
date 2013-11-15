@@ -7,13 +7,16 @@
 
 __author__ = 'Eric'
 
-import pygame
 import sys
+from random import shuffle
+
+import pygame
+from pygame.locals import *
+
 from modules.parts.Tetromino import Tetromino
 from modules.parts.Grid import Grid
-from modules.consts import *
-from pygame.locals import *
-from random import shuffle
+from consts import *
+
 
 class SinglePlayerGame(object):
 

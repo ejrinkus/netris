@@ -9,7 +9,7 @@
 __author__ = 'Eric'
 
 import pygame
-from modules.consts import *
+from consts import *
 
 # Coordinates of individual sprites within their sheet
 SPRITE_COORD =  { 'I' : (0,0,24,24),
