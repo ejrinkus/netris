@@ -10,8 +10,8 @@ __author__ = 'Eric'
 import sys
 import pygame
 from pygame.locals import *
-from consts import *
-from modules.gametypes.single import SinglePlayerGame
+from game.consts import *
+from game.single import SinglePlayerGame
 
 # Set up the fonts and logo for the menu
 singleLabel = menuFont.render("Single Player", False, LIGHT_GREY)
@@ -26,7 +26,8 @@ optionsRect = pygame.Rect((SCREEN_W/2 - optionsLabel.get_width()/2, SCREEN_H/2 +
 quitLabel = menuFont.render("Quit Game", False, LIGHT_GREY)
 quitRect = pygame.Rect((SCREEN_W/2 - quitLabel.get_width()/2, SCREEN_H/2 + BOX_SIZE*6),
                               (quitLabel.get_width(), quitLabel.get_height()))
-logo = pygame.image.load("assets/logo.png").convert()
+logo_file = StringIO.StringIO(pkgutil.get_data('game', "logo.png"))
+logo = pygame.image.load(logo_file, "logo.png").convert()
 
 # Render loop
 while True:

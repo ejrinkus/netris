@@ -9,7 +9,7 @@
 __author__ = 'Eric'
 
 import pygame
-from consts import *
+from game.consts import *
 
 # Coordinates of individual sprites within their sheet
 SPRITE_COORD =  { 'I' : (0,0,24,24),
@@ -19,10 +19,6 @@ SPRITE_COORD =  { 'I' : (0,0,24,24),
                   'S' : (96,0,24,24),
                   'T' : (120,0,24,24),
                   'Z' : (144,0,24,24)}
-
-# Sprite sheets used by blocks
-sheet = pygame.image.load(BLOCK_FILE).convert()
-shadowsheet = pygame.image.load(SHADOW_FILE).convert()
 
 # Class to display each individual block
 # id: Shape the block belongs to (determines color, too)
@@ -37,6 +33,6 @@ class Block(pygame.sprite.Sprite):
         self.id = t
         self.image = pygame.Surface(rect.size).convert()
         if shadow:
-            self.image.blit(shadowsheet, (0, 0), rect)
+            self.image.blit(SHADOW_SHEET, (0, 0), rect)
         else:
-            self.image.blit(sheet, (0, 0), rect)
+            self.image.blit(BLOCK_SHEET, (0, 0), rect)

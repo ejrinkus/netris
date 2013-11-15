@@ -5,13 +5,13 @@
 #  various helper methods for moving and drawing pieces within the grid.
 #
 ################################################################################
+from game.Cell import Cell
+from game.Tetromino import Tetromino
 
 __author__ = 'Eric'
 
 import pygame
-from modules.parts.Cell import Cell
-from modules.parts.Tetromino import Tetromino
-from consts import *
+from game.consts import *
 
 # Class representing a grid
 # grid: 2-D array of cell objects representing this grid

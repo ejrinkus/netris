@@ -8,7 +8,7 @@
 __author__ = 'Eric'
 
 import pygame
-from consts import *
+from game.consts import *
 
 # Class representing a single cell of a grid
 # surface: surface upon which the contents of the cell may be drawn

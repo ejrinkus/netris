@@ -4,10 +4,9 @@
 #  and contains the proper rendering block for that particular tetromino.
 #
 ################################################################################
+from game.Block import Block
 
 __author__ = 'Eric'
-
-from modules.parts.Block import Block
 
 # Default block orientations
 BLOCKS = { 'I' : (('E','E','E','E'),

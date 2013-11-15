@@ -4,6 +4,8 @@
 #  logic loop for playing a single player game.
 #
 ################################################################################
+from game.Grid import Grid
+from game.Tetromino import Tetromino
 
 __author__ = 'Eric'
 
@@ -13,9 +15,7 @@ from random import shuffle
 import pygame
 from pygame.locals import *
 
-from modules.parts.Tetromino import Tetromino
-from modules.parts.Grid import Grid
-from consts import *
+from game.consts import *
 
 
 class SinglePlayerGame(object):
@@ -29,6 +29,7 @@ class SinglePlayerGame(object):
         self.spawn = True
         self.hold = False
         self.hold_flag = False
+        self.first_hold = False
         pygame.time.set_timer(INPUT_TIMER, 50)
         pygame.time.set_timer(DROP_TIMER, 1000)
         self.u_hold = self.d_hold = self.l_hold = self.r_hold = 3
@@ -95,11 +96,13 @@ class SinglePlayerGame(object):
                 # Prepare active piece for drawing (or spawn new piece if there was no held piece)
                 if self.activepiece.id == 'E':
                     self.spawn = True
+                    self.first_hold = True
 
             # Spawn a new piece, and determine the next piece
             if self.spawn:
                 self.spawn = False
-                self.hold_flag = True
+                if self.first_hold: self.first_hold = False
+                else: self.hold_flag = True
                 self.activepiece = Tetromino(self.nextpiece.id)
                 self.count += 1
                 if self.count > 6:
@@ -138,7 +141,7 @@ class SinglePlayerGame(object):
                         if event.key == K_RCTRL and self.activepiece.id != 'O':
                             self.clearPiece(self.activepiece)
                             self.board.validRotRight(self.activepiece)
-                        if event.key == K_SPACE and self.hold_flag == True:
+                        if event.key == K_SPACE and self.hold_flag:
                             self.hold = True
 
                     # Pause/exit the game
