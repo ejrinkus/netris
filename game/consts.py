@@ -36,6 +36,8 @@ BLOCK_FILE = StringIO.StringIO(pkgutil.get_data('game', "block_sheet.png"))
 SHADOW_FILE = StringIO.StringIO(pkgutil.get_data('game', "block_shadows.png"))
 BLOCK_SHEET = pygame.image.load(BLOCK_FILE, "block_sheet.png").convert()
 SHADOW_SHEET = pygame.image.load(SHADOW_FILE, "block_shadows.png").convert()
+LOGO_FILE = StringIO.StringIO(pkgutil.get_data('game', "logo.png"))
+LOGO = pygame.image.load(LOGO_FILE, "logo.png").convert()
 
 # event ids
 INPUT_TIMER = USEREVENT+1
@@ -44,7 +46,9 @@ DROP_TIMER = USEREVENT+2
 # Fonts
 scoreFont = pygame.font.SysFont("monospace",24)
 font_file = StringIO.StringIO(pkgutil.get_data('game', "spacerangeracad.ttf"))
-menuFont = pygame.font.Font(font_file,BOX_SIZE*3)
+menuFont = pygame.font.Font(font_file, BOX_SIZE*3)
+font_file = StringIO.StringIO(pkgutil.get_data('game', "spacerangeracad.ttf"))
+pauseFont = pygame.font.Font(font_file, BOX_SIZE*2)
 
 #tmpdir = tempfile.mkdtemp()
 #fname = os.path.join(tmpdir, "assets/spacerangeracad.ttf")

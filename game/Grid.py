@@ -136,6 +136,16 @@ class Grid(object):
             surf.blit(self.grid[row][col].surface, (col*x+self.location[0], row*x+self.location[1]))
         self.changed = []
 
+    # Draws all cells to the given surface
+    # surf: surface to be drawn to
+    def drawAll(self, surf):
+        x = BOX_SIZE-1
+        for i, row in enumerate(self.grid):
+            for j, cell in enumerate(row):
+                if self.grid[i][j].hidden: continue
+                surf.blit(self.grid[i][j].surface, (j*x+self.location[0], i*x+self.location[1]))
+        self.changed = []
+
     # Returns True if the movement is valid, or False if not. (for all below functions)
     # tetromino: Tetromino object being moved
 

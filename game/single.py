@@ -16,6 +16,7 @@ import pygame
 from pygame.locals import *
 
 from game.consts import *
+from game.pause import Pause
 
 
 class SinglePlayerGame(object):
@@ -48,6 +49,7 @@ class SinglePlayerGame(object):
         self.level = 1
         self.shadowPiece = None
         self.lock = False
+        self.pause = Pause(self)
 
         # Playing board
         self.board = Grid((SCREEN_W/2 - BOX_SIZE*5, BOX_SIZE/5), 10, 22, (0,1))
@@ -146,7 +148,12 @@ class SinglePlayerGame(object):
 
                     # Pause/exit the game
                     if event.key == K_p:
-                        self.paused = not self.paused
+                        self.left = self.l_first = False
+                        self.right = self.r_first = False
+                        self.down = self.d_first = False
+                        self.paused = True
+                        self.pause.pause()
+
                     if event.key == K_ESCAPE:
                         return
 
@@ -191,6 +198,19 @@ class SinglePlayerGame(object):
                         if not self.board.validMoveDown(self.activepiece):
                             self.spawn = True
                             self.lock = True
+
+            while self.paused:
+                pygame.display.update()
+                for event in pygame.event.get():
+                    if event.type == KEYDOWN and event.key == K_p:
+                        self.paused = False
+                        self.pause.unpause()
+                    elif event.type == KEYDOWN and event.key == K_ESCAPE:
+                        return
+                    elif event.type == QUIT:
+                        pygame.quit()
+                        sys.exit()
+
 
             # Draw the piece and shadow to the board
             self.board.drawPiece(self.activepiece,self.lock)

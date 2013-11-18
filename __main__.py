@@ -26,13 +26,11 @@ optionsRect = pygame.Rect((SCREEN_W/2 - optionsLabel.get_width()/2, SCREEN_H/2 +
 quitLabel = menuFont.render("Quit Game", False, LIGHT_GREY)
 quitRect = pygame.Rect((SCREEN_W/2 - quitLabel.get_width()/2, SCREEN_H/2 + BOX_SIZE*6),
                               (quitLabel.get_width(), quitLabel.get_height()))
-logo_file = StringIO.StringIO(pkgutil.get_data('game', "logo.png"))
-logo = pygame.image.load(logo_file, "logo.png").convert()
 
 # Render loop
 while True:
     # Draw Logo
-    disp.blit(logo, (SCREEN_W/2 - logo.get_width()/2, BOX_SIZE*2))
+    disp.blit(LOGO, (SCREEN_W/2 - LOGO.get_width()/2, BOX_SIZE*2))
 
     # Draw Text
     disp.blit(singleLabel, (singleRect.left, singleRect.top))
