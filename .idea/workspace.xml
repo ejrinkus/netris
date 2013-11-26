@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64bb70f6-a2aa-438b-ba59-50ddcb2c3ac1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/game/options.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/netris.zip" afterPath="$PROJECT_DIR$/netris.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__main__.py" afterPath="$PROJECT_DIR$/__main__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/consts.py" afterPath="$PROJECT_DIR$/game/consts.py" />
+    <list default="true" id="64bb70f6-a2aa-438b-ba59-50ddcb2c3ac1" name="Default" comment="Added support for highscores and options.  Implemented the options screen (allows for editing a volume value, which doesn't do anything, and a username).  Settings are saved upon exit.  Still need to add high score support.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/eztext.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/zipit.bat" afterPath="$PROJECT_DIR$/zipit.bat" />
     </list>
     <ignored path="netris.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -465,13 +461,18 @@
       <created>1384812491600</created>
       <updated>1384812491600</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added support for highscores and options.  Implemented the options screen (allows for editing a volume value, which doesn't do anything, and a username).  Settings are saved upon exit.  Still need to add high score support.">
+      <created>1385444320467</created>
+      <updated>1385444320467</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -486,7 +487,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -522,7 +522,8 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <MESSAGE value="Added pause overlay" />
     <MESSAGE value="Forgot to update zip for last push" />
-    <option name="LAST_COMMIT_MESSAGE" value="Forgot to update zip for last push" />
+    <MESSAGE value="Added support for highscores and options.  Implemented the options screen (allows for editing a volume value, which doesn't do anything, and a username).  Settings are saved upon exit.  Still need to add high score support." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added support for highscores and options.  Implemented the options screen (allows for editing a volume value, which doesn't do anything, and a username).  Settings are saved upon exit.  Still need to add high score support." />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.7877095" />
   </component>
   <component name="XDebuggerManager">
