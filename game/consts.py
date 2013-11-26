@@ -6,7 +6,10 @@
 
 __author__ = 'Eric'
 
-import pygame, StringIO, pkgutil, os, tempfile
+import pygame
+import StringIO
+import pkgutil
+import pickle
 from pygame.locals import USEREVENT
 
 # Initializers
@@ -50,16 +53,19 @@ menuFont = pygame.font.Font(font_file, BOX_SIZE*3)
 font_file = StringIO.StringIO(pkgutil.get_data('game', "spacerangeracad.ttf"))
 pauseFont = pygame.font.Font(font_file, BOX_SIZE*2)
 
-#tmpdir = tempfile.mkdtemp()
-#fname = os.path.join(tmpdir, "assets/spacerangeracad.ttf")
-#try:
-#    with open(fname, 'wb') as f:
-#        data = pkgutil.get_data('assets', "assets/spacerangeracad.ttf")
-#        f.write(data)
-#    menuFont = pygame.font.Font(fname, BOX_SIZE*3)
-#finally:
-#    try:
-#        os.remove(fname)
-#        os.rmdir(tmpdir)
-#    except:
-#        pass
+# Data File Stuff
+try:
+    GAME_DATA = pickle.load(open("gd.dat",'rb'))
+except EOFError:
+    GAME_DATA = {"Score 1": ["GrandMaster","50000"],
+             "Score 2": ["Master","45000"],
+             "Score 3": ["Expert","40000"],
+             "Score 4": ["Advanced","35000"],
+             "Score 5": ["Experienced","30000"],
+             "Score 6": ["Intermediate","25000"],
+             "Score 7": ["Stacker","20000"],
+             "Score 8": ["Learner","15000"],
+             "Score 9": ["Beginner","10000"],
+             "Score 10": ["N00B","5000"],
+             "Volume": ["10",],
+             "User Name": ["Player",]}

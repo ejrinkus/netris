@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64bb70f6-a2aa-438b-ba59-50ddcb2c3ac1" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/game/options.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/netris.zip" afterPath="$PROJECT_DIR$/netris.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__main__.py" afterPath="$PROJECT_DIR$/__main__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/consts.py" afterPath="$PROJECT_DIR$/game/consts.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/zipit.bat" afterPath="$PROJECT_DIR$/zipit.bat" />
     </list>
     <ignored path="netris.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,17 +33,32 @@
       <file leaf-file-name="__main__.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/__main__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="452" selection-end="517" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1088">
-              <folding />
+            <state line="64" column="63" selection-start="2519" selection-end="2519" vertical-scroll-proportion="0.0" vertical-offset="839" max-vertical-offset="1275">
+              <folding>
+                <element signature="e#261#271#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="consts.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="options.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/game/options.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="100" column="70" selection-start="4420" selection-end="4420" vertical-scroll-proportion="3.8990827" vertical-offset="0" max-vertical-offset="2057">
+              <folding>
+                <element signature="e#21#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="consts.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game/consts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="78" selection-start="1634" selection-end="1634" vertical-scroll-proportion="0.53296703" vertical-offset="622" max-vertical-offset="1173">
-              <folding />
+            <state line="57" column="48" selection-start="1771" selection-end="1771" vertical-scroll-proportion="0.0" vertical-offset="873" max-vertical-offset="1309">
+              <folding>
+                <element signature="e#243#256#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,7 +68,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="29" column="22" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.0" vertical-offset="299" max-vertical-offset="850">
               <folding>
-                <element signature="e#411#424#0" expanded="true" />
+                <marker date="1384812279889" expanded="true" signature="411:445" placeholder="import ..." />
+                <marker date="1384812279889" expanded="true" signature="728:2017" placeholder="..." />
+                <marker date="1384812279889" expanded="true" signature="824:1385" placeholder="..." />
+                <marker date="1384812279889" expanded="true" signature="1506:1817" placeholder="..." />
+                <marker date="1384812279889" expanded="true" signature="1897:2017" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -58,7 +81,7 @@
       <file leaf-file-name="single.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game/single.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="44" selection-start="4694" selection-end="4694" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4352">
+            <state line="129" column="44" selection-start="4694" selection-end="4694" vertical-scroll-proportion="0.0" vertical-offset="2193" max-vertical-offset="4369">
               <folding />
             </state>
           </provider>
@@ -67,7 +90,7 @@
       <file leaf-file-name="Grid.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game/Grid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="396" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5168">
+            <state line="0" column="0" selection-start="0" selection-end="396" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5185">
               <folding />
             </state>
           </provider>
@@ -91,12 +114,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/netris.py" />
-        <option value="$PROJECT_DIR$/game/Tetromino.py" />
-        <option value="$PROJECT_DIR$/zipit.bat" />
         <option value="$PROJECT_DIR$/netris.bat" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/__main__.py" />
         <option value="$PROJECT_DIR$/../scripting_challenge/ScriptBattle/groups/rinkus/prob1.py" />
         <option value="$PROJECT_DIR$/../scripting_challenge/ScriptBattle/groups/rinkus/prob3.py" />
         <option value="$PROJECT_DIR$/../scripting_challenge/ScriptBattle/groups/rinkus/prob5.py" />
@@ -106,7 +125,11 @@
         <option value="$PROJECT_DIR$/game/Grid.py" />
         <option value="$PROJECT_DIR$/game/single.py" />
         <option value="$PROJECT_DIR$/game/pause.py" />
+        <option value="$PROJECT_DIR$/zipit.bat" />
+        <option value="$PROJECT_DIR$/gd.dat" />
+        <option value="$PROJECT_DIR$/__main__.py" />
         <option value="$PROJECT_DIR$/game/consts.py" />
+        <option value="$PROJECT_DIR$/game/options.py" />
       </list>
     </option>
   </component>
@@ -243,6 +266,24 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.netris">
+    <configuration default="false" name="example" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="netris" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/example.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="py.test">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -382,9 +423,15 @@
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.netris" />
+      <item index="1" class="java.lang.String" itemvalue="Python.example" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.example" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
@@ -414,28 +461,32 @@
       <created>1384812354775</created>
       <updated>1384812354775</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Forgot to update zip for last push">
+      <created>1384812491600</created>
+      <updated>1384812491600</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963397" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1317716" sideWeight="0.6372549" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1317716" sideWeight="0.75490195" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39869282" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31862745" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3627451" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24509804" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25653595" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -470,43 +521,14 @@
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <MESSAGE value="Added pause overlay" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added pause overlay" />
+    <MESSAGE value="Forgot to update zip for last push" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forgot to update zip for last push" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.7877095" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../scripting_challenge/ScriptBattle/groups/rinkus/3.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scripting_challenge/ScriptBattle/groups/rinkus/4.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scripting_challenge/ScriptBattle/groups/rinkus/5.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scripting_challenge/ScriptBattle/groups/rinkus/6.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scripting_challenge/ScriptBattle/problems/1">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="12" selection-end="12" vertical-scroll-proportion="0.08252427" vertical-offset="0" max-vertical-offset="412" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scripting_challenge/ScriptBattle/groups/rinkus/prob3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="27" selection-start="182" selection-end="182" vertical-scroll-proportion="0.36324787" vertical-offset="0" max-vertical-offset="468" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scripting_challenge/ScriptBattle/groups/rinkus/prob4.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="12" selection-start="354" selection-end="354" vertical-scroll-proportion="0.61752135" vertical-offset="0" max-vertical-offset="468" />
@@ -532,13 +554,6 @@
         <state line="10" column="11" selection-start="132" selection-end="132" vertical-scroll-proportion="0.36324787" vertical-offset="0" max-vertical-offset="468" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="452" selection-end="517" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1088">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/game/single.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="129" column="44" selection-start="4694" selection-end="4694" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4352">
@@ -557,15 +572,67 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="22" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.0" vertical-offset="299" max-vertical-offset="850">
           <folding>
-            <element signature="e#411#424#0" expanded="true" />
+            <marker date="1384812279889" expanded="true" signature="411:445" placeholder="import ..." />
+            <marker date="1384812279889" expanded="true" signature="728:2017" placeholder="..." />
+            <marker date="1384812279889" expanded="true" signature="824:1385" placeholder="..." />
+            <marker date="1384812279889" expanded="true" signature="1506:1817" placeholder="..." />
+            <marker date="1384812279889" expanded="true" signature="1897:2017" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zipit.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="45" selection-start="55" selection-end="55" vertical-scroll-proportion="0.038990825" vertical-offset="0" max-vertical-offset="436">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/netris.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="436">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="63" selection-start="2519" selection-end="2519" vertical-scroll-proportion="0.0" vertical-offset="839" max-vertical-offset="1275">
+          <folding>
+            <element signature="e#261#271#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eztext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2686">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/game/consts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="78" selection-start="1634" selection-end="1634" vertical-scroll-proportion="0.53296703" vertical-offset="622" max-vertical-offset="1173">
+        <state line="57" column="48" selection-start="1771" selection-end="1771" vertical-scroll-proportion="0.0" vertical-offset="873" max-vertical-offset="1309">
+          <folding>
+            <element signature="e#243#256#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gd.dat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="70" selection-start="4420" selection-end="4420" vertical-scroll-proportion="3.8990827" vertical-offset="0" max-vertical-offset="2057">
+          <folding>
+            <element signature="e#21#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

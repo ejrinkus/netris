@@ -6,12 +6,13 @@
 
 __author__ = 'Eric'
 
-# All the fun little imports
 import sys
+import pickle
 import pygame
 from pygame.locals import *
 from game.consts import *
 from game.single import SinglePlayerGame
+from game.options import OptionsMenu
 
 # Set up the fonts and logo for the menu
 singleLabel = menuFont.render("Single Player", False, LIGHT_GREY)
@@ -26,6 +27,9 @@ optionsRect = pygame.Rect((SCREEN_W/2 - optionsLabel.get_width()/2, SCREEN_H/2 +
 quitLabel = menuFont.render("Quit Game", False, LIGHT_GREY)
 quitRect = pygame.Rect((SCREEN_W/2 - quitLabel.get_width()/2, SCREEN_H/2 + BOX_SIZE*6),
                               (quitLabel.get_width(), quitLabel.get_height()))
+
+# Options Screen
+OPTIONS_MENU = OptionsMenu()
 
 # Render loop
 while True:
@@ -54,9 +58,12 @@ while True:
 
             # Clicked Options
             if optionsRect.collidepoint(event.pos):
-                print "Options"
+                OPTIONS_MENU.main()
 
             # Clicked Quit Game
             if quitRect.collidepoint(event.pos):
+                pickle.dump(GAME_DATA, open("gd.dat",'wb'), -1)
                 pygame.quit()
                 sys.exit()
+
+
