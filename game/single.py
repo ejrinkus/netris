@@ -248,4 +248,3 @@ class SinglePlayerGame(object):
             disp.blit(nextlabel, (self.next_box.location[0], self.next_box.location[1] - BOX_SIZE))
             disp.blit(holdlabel, (self.hold_box.location[0], self.hold_box.location[1] - BOX_SIZE))
             pygame.display.update()
-

@@ -110,6 +110,3 @@ class OptionsMenu:
 
             if self.focusinput:
                 self.textbox.update(events)
-
-
-
