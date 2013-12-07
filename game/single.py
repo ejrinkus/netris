@@ -17,7 +17,7 @@ from pygame.locals import *
 
 from game.consts import *
 from game.pause import Pause
-
+from game.gameover import GameOver
 
 class SinglePlayerGame(object):
 
@@ -27,6 +27,7 @@ class SinglePlayerGame(object):
 
         # Flags and other necessary variables
         self.paused = False
+        self.over = False
         self.spawn = True
         self.hold = False
         self.hold_flag = False
@@ -50,6 +51,7 @@ class SinglePlayerGame(object):
         self.shadowPiece = None
         self.lock = False
         self.pause = Pause(self)
+        self.gameover = GameOver(self)
 
         # Playing board
         self.board = Grid((SCREEN_W/2 - BOX_SIZE*5, BOX_SIZE/5), 10, 22, (0,1))
@@ -70,7 +72,7 @@ class SinglePlayerGame(object):
             for j, block in enumerate(row):
                 if block != 'E':
                     self.board.clearCell(i+p.coord[1], j+p.coord[0])
-        self.board.clearShadow(p);
+        self.board.clearShadow(p)
 
     # Main function for playing single player
     def main(self):
@@ -115,7 +117,9 @@ class SinglePlayerGame(object):
                 self.next_box.clear()
                 # Draw next piece
                 self.next_box.drawPiece(self.nextpiece)
-                if not self.board.validPos(self.activepiece): return
+                if not self.board.validPos(self.activepiece):
+                    self.over = True
+                    self.gameover.gameover()
             else:
                 self.clearPiece(self.activepiece)
 
@@ -211,6 +215,14 @@ class SinglePlayerGame(object):
                         pygame.quit()
                         sys.exit()
 
+            while self.over:
+                pygame.display.update()
+                for event in pygame.event.get():
+                    if event.type == KEYDOWN and event.key == K_ESCAPE:
+                        return
+                    elif event.type == QUIT:
+                        pygame.quit()
+                        sys.exit()
 
             # Draw the piece and shadow to the board
             self.board.drawPiece(self.activepiece,self.lock)
